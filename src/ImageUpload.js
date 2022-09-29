@@ -114,10 +114,11 @@ function ImageUpload({ username }) {
             <input
               type="text"
               value={caption}
+              className="imageUpload__input"
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Enter a caption..."
             />
-            <input type="file" onChange={handleChange} />
+            <input type="file" className="imageUpload__input_file" onChange={handleChange} />
             <Button onClick={handleUpload}>Upload</Button>
           </Box>
         </Fade>
