@@ -3,39 +3,38 @@ import "./Post.css";
 import Avatar from "@mui/material/Avatar";
 import { db } from "./firebase";
 import firebase from 'firebase/compat/app';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import { Button } from "@mui/material";
 
 function Post({ postId, user, username, caption, imageUrl }) {
   // console.log(username, imageUrl);
 
-  const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState('');
-  const [avatarName, setAvatarName] = useState('');
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState('');
+    const [avatarName, setAvatarName] = useState('');
 
-//   console.log(comments);
-//   console.log(comment);
-  console.log(avatarName);
+    // console.log(comments);
+    // console.log(comment);
+    // console.log(avatarName);
 
-  useEffect(() => {
+    useEffect(() => {
 
-    // let name = user.displayName.substring(0,1).toUpperCase();
-    // setAvatarName(name);
+        let unsubscribe;
+        if (postId) {
+        unsubscribe = db
+            .collection("posts")
+            .doc(postId)
+            .collection("comments")
+            .orderBy("timestamp", "desc")
+            .onSnapshot((snapshot) => {
+            setComments(snapshot.docs.map((doc) => doc.data()));
+            });
+        }
 
-    let unsubscribe;
-    if (postId) {
-      unsubscribe = db
-        .collection("posts")
-        .doc(postId)
-        .collection("comments")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) => {
-          setComments(snapshot.docs.map((doc) => doc.data()));
-        });
-    }
-
-    return () => {
-        unsubscribe();
-    }
-  }, [postId]);
+        return () => {
+            unsubscribe();
+        }
+    }, [postId]);
 
     const postComment = (e) => {
         e.preventDefault();
