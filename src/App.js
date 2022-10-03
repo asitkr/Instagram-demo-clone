@@ -201,7 +201,7 @@ function App() {
         {user?.displayName ? (
           <ImageUpload username={user.displayName} />
         ) : (
-          <h3>Please Login to Upload</h3>
+          <center><h3>Please Login to Upload</h3></center>
         )}
         {posts.map((post, id) => (
           <Post
