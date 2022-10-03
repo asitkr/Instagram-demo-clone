@@ -141,7 +141,7 @@ function App() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
-              type="text"
+              type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -170,7 +170,7 @@ function App() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
-              type="text"
+              type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
